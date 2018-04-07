@@ -20,6 +20,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -36,6 +37,10 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'spork-rails', '~> 4.0'
+  gem 'guard-spork'
+  gem 'childprocess'
 end
 
 group :development do
@@ -54,3 +59,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Bootstrap
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'bcrypt'
+gem 'bcrypt-ruby', '3.1.2'
