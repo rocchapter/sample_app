@@ -14,7 +14,7 @@ describe User do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
-  # it { should be_vaild }
+  #  it { should be_vaild }
 
   describe "when name is not present" do
     before { @user.name = "" }
@@ -84,6 +84,27 @@ describe User do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
       it { should_not eq user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be_falsey }
+    end
+  end
+
+  describe "signup" do
+    before { visit signup_path }
+    let(:submit) { "Create my account" }
+    describe "with invalid information" do
+      it "should not create a user" do
+        expect { click_button submit }.not_to change(User, :count)
+      end
+    end
+    describe "with valid information" do
+      before do
+        fill_in "Name", with: "Example User"
+        fill_in "Email", with: "user@example.com"
+        fill_in "Password", with: "foobar"
+        fill_in "Confirmation", with: "foobar"
+      end
+      it "should create a user" do
+        expect { click_button submit }.to change(User, :count).by(1)
+      end
     end
   end
   
